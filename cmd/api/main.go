@@ -1,21 +1,16 @@
 package main
 
 import (
-	"animalz/api/resource/animal"
+	"animalz/api/router"
 	"animalz/config"
-
-	"github.com/labstack/echo/v4"
 )
 
 func main() {
 	// create the config
 	c := config.New()
 
-	e := echo.New()
-
-	gr := e.Group("/api/v1")
-	gr.GET("/animals", animal.GetAnimals)
+	srv := router.New()
 
 	// Start server
-	e.Logger.Fatal(e.Start(c.Server.Addr()))
+	srv.Logger.Fatal(srv.Start(c.Server.Addr()))
 }
