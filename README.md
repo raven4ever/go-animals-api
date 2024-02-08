@@ -5,7 +5,8 @@ This is a simple application written in Go that uses a SQL database to store and
 Technologies used:
 
 - Go
-  - Echo
+  - [https://github.com/labstack/echo](echo)
+  - [https://github.com/joeshaw/envdecode](envdecode)
 - PostgreSQL
 - HTMX
 
