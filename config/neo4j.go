@@ -8,6 +8,7 @@ type Neo4jConfig struct {
 	Port     int    `env:"NEO4J_PORT,default=7687"`
 	User     string `env:"NEO4J_USER,default=neo4j"`
 	Password string `env:"NEO4J_PASSWORD,default=neo4jp@ssw0rd"`
+	DemoData bool   `env:"NEO4J_DEMO_DATA,default=true"`
 }
 
 func (nc *Neo4jConfig) Addr() string {

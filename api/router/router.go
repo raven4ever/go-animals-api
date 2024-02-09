@@ -4,12 +4,15 @@ import (
 	"animalz/api/resource/animals"
 	"animalz/api/resource/foods"
 	"animalz/api/resource/persons"
+	"animalz/config"
 
 	"github.com/labstack/echo/v4"
 )
 
-func New() *echo.Echo {
+func New(serverConfig config.ServerConfig) *echo.Echo {
 	echoServer := echo.New()
+	
+	echoServer.Server.Addr = serverConfig.Addr()
 
 	// create the API v1 group
 	apiV1Group := echoServer.Group("/api/v1")
