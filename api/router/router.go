@@ -2,6 +2,7 @@ package router
 
 import (
 	"animalz/api/resource/animals"
+	"animalz/api/resource/foods"
 	"animalz/api/resource/persons"
 
 	"github.com/labstack/echo/v4"
@@ -18,6 +19,9 @@ func New() *echo.Echo {
 
 	// add the persons endpoints
 	apiV1Group.GET("/persons", persons.GetPersons)
+
+	// add the foods endpoints
+	apiV1Group.GET("/foods", foods.GetFoods)
 
 	return echoServer
 }
