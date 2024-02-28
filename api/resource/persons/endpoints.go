@@ -10,11 +10,8 @@ import (
 
 // get all persons endpoint
 func GetPersons(c echo.Context) error {
-	test := model.Persons{
-		model.Person{ID: uuid.NewString(), FirstName: "John", LastName: "Doe", NickName: "JD", Age: 25},
-		model.Person{ID: uuid.NewString(), FirstName: "Tracy", LastName: "Reagan", NickName: "TR", Age: 44},
-		model.Person{ID: uuid.NewString(), FirstName: "Adrian", LastName: "Junior", NickName: "AJ", Age: 31},
-	}
-
+	ctx := context.Background()
+	session := db.NewSession(ctx, driver, neo4j.AccessModeWrite)
+	defer session.Close(ctx)
 	return c.JSON(http.StatusOK, test)
 }

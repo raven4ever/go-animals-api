@@ -49,3 +49,25 @@ func (r *AnimalRepo) CreateAnimal(animal model.Animal) (model.Animal, error) {
 
 	return model.CreateAnimalFromNeo4jNode(newAnimal.(neo4j.Node)), err
 }
+
+func (r *AnimalRepo) GetAnimals() (model.Animals, error) {
+	animals, err := r.session.ExecuteRead(r.ctx, func(tx neo4j.ManagedTransaction) (any, error) {
+		result, err := tx.Run(r.ctx, getAnimalsQuery, nil)
+		if err != nil {
+			return nil, err
+		}
+
+		var animals model.Animals
+		for result.Next(r.ctx) {
+			animals = append(animals, model.CreateAnimalFromNeo4jNode(result.Record().Values[0].(neo4j.Node)))
+		}
+
+		return animals, nil
+	})
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	return animals.(model.Animals), err
+}

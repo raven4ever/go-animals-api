@@ -50,3 +50,25 @@ func (r *PersonRepo) CreatePerson(person model.Person) (model.Person, error) {
 
 	return model.CreatePersonFromNeo4jNode(newPerson.(neo4j.Node)), err
 }
+
+func (r *PersonRepo) GetPersons() (model.Persons, error) {
+	persons, err := r.session.ExecuteRead(r.ctx, func(tx neo4j.ManagedTransaction) (any, error) {
+		result, err := tx.Run(r.ctx, getPersonsQuery, nil)
+		if err != nil {
+			return nil, err
+		}
+
+		var persons model.Persons
+		for result.Next(r.ctx) {
+			persons = append(persons, model.CreatePersonFromNeo4jNode(result.Record().Values[0].(neo4j.Node)))
+		}
+
+		return persons, nil
+	})
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	return persons.(model.Persons), err
+}

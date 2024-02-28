@@ -10,11 +10,8 @@ import (
 
 // get all animals endpoint
 func GetAnimals(c echo.Context) error {
-	test := model.Animals{
-		model.Animal{ID: uuid.NewString(), Name: "Fido", Species: "Dog", Age: 3},
-		model.Animal{ID: uuid.NewString(), Name: "Whiskers", Species: "Cat", Age: 5},
-		model.Animal{ID: uuid.NewString(), Name: "Fluffy", Species: "Rabbit", Age: 2},
-	}
-
+	session := driver.NewSession(ctx, neo4j.SessionConfig{AccessMode: neo4j.AccessModeWrite})
+	defer session.Close(ctx)
+	aRepo := repositories.NewAnimalRepo(session, ctx)
 	return c.JSON(http.StatusOK, test)
 }

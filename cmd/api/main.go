@@ -33,7 +33,7 @@ func main() {
 	// load demo data id applicable
 	if c.Neo4j.DemoData {
 		log.Println("Loading demo data...")
-		db.LoadDemoData(ctx, driver)
+		db.LoadDemoData(driver)
 	}
 
 	// create the server

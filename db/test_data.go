@@ -30,8 +30,9 @@ var (
 	}
 )
 
-func LoadDemoData(ctx context.Context, driver neo4j.DriverWithContext) {
-	session := driver.NewSession(ctx, neo4j.SessionConfig{AccessMode: neo4j.AccessModeWrite})
+func LoadDemoData(driver neo4j.DriverWithContext) {
+	ctx := context.Background()
+	session := NewSession(ctx, driver, neo4j.AccessModeWrite)
 	defer session.Close(ctx)
 
 	// load persons

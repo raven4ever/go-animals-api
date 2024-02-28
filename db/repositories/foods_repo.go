@@ -49,3 +49,25 @@ func (r *FoodRepo) CreateFood(food model.Food) (model.Food, error) {
 
 	return model.CreateFoodFromNeo4jNode(newFood.(neo4j.Node)), err
 }
+
+func (r *FoodRepo) GetFoods() (model.Foods, error) {
+	foods, err := r.session.ExecuteRead(r.ctx, func(tx neo4j.ManagedTransaction) (any, error) {
+		result, err := tx.Run(r.ctx, getFoodsQuery, nil)
+		if err != nil {
+			return nil, err
+		}
+
+		var foods model.Foods
+		for result.Next(r.ctx) {
+			foods = append(foods, model.CreateFoodFromNeo4jNode(result.Record().Values[0].(neo4j.Node)))
+		}
+
+		return foods, nil
+	})
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	return foods.(model.Foods), err
+}
