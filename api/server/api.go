@@ -1,9 +1,9 @@
 package server
 
 import (
-	"animalz/api/resource/animals"
-	"animalz/api/resource/foods"
-	"animalz/api/resource/persons"
+	"animalz/api/v1/animals"
+	"animalz/api/v1/foods"
+	"animalz/api/v1/persons"
 
 	"animalz/db"
 
