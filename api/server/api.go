@@ -4,17 +4,20 @@ import (
 	"animalz/api/resource/animals"
 	"animalz/api/resource/foods"
 	"animalz/api/resource/persons"
+	"animalz/db"
 
 	"github.com/labstack/echo/v4"
 )
 
 type ApiServer struct {
-	Address string
+	Address  string
+	Database *db.Database
 }
 
-func NewApiServer(address string) *ApiServer {
+func NewApiServer(address string, db *db.Database) *ApiServer {
 	return &ApiServer{
-		Address: address,
+		Address:  address,
+		Database: db,
 	}
 }
 

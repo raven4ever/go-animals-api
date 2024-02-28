@@ -7,10 +7,28 @@ import (
 	"github.com/neo4j/neo4j-go-driver/v5/neo4j"
 )
 
-func New(dbConfig config.Neo4jConfig) (neo4j.DriverWithContext, error) {
-	return neo4j.NewDriverWithContext(dbConfig.Addr(), neo4j.BasicAuth(dbConfig.User, dbConfig.Password, ""))
+type Database struct {
+	Context context.Context
+	Driver  neo4j.DriverWithContext
 }
 
-func NewSession(ctx context.Context, driver neo4j.DriverWithContext, accessMode neo4j.AccessMode) neo4j.SessionWithContext {
-	return driver.NewSession(ctx, neo4j.SessionConfig{AccessMode: accessMode})
+func NewDatabase(dbConfig config.Neo4jConfig) (*Database, error) {
+	ctx := context.Background()
+	driver, err := neo4j.NewDriverWithContext(dbConfig.Addr(), neo4j.BasicAuth(dbConfig.User, dbConfig.Password, ""))
+	if err != nil {
+		return nil, err
+	}
+
+	return &Database{
+		Context: ctx,
+		Driver:  driver,
+	}, nil
+}
+
+func (d *Database) Close() {
+	d.Driver.Close(d.Context)
+}
+
+func (d *Database) VerifyConnectivity() error {
+	return d.Driver.VerifyConnectivity(d.Context)
 }

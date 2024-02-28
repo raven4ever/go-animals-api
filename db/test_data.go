@@ -3,11 +3,11 @@ package db
 import (
 	"animalz/db/model"
 	"animalz/db/repositories"
-	"context"
+
+	"log"
 
 	"github.com/google/uuid"
 	"github.com/neo4j/neo4j-go-driver/v5/neo4j"
-	"log"
 )
 
 var (
@@ -30,13 +30,14 @@ var (
 	}
 )
 
-func LoadDemoData(driver neo4j.DriverWithContext) {
-	ctx := context.Background()
-	session := NewSession(ctx, driver, neo4j.AccessModeWrite)
-	defer session.Close(ctx)
+func (d *Database) LoadDemoData() {
+	session := d.Driver.NewSession(d.Context, neo4j.SessionConfig{
+		AccessMode: neo4j.AccessModeWrite,
+	})
+	defer session.Close(d.Context)
 
 	// load persons
-	pRepo := repositories.NewPersonRepo(session, ctx)
+	pRepo := repositories.NewPersonRepo(session, d.Context)
 
 	for _, p := range testPersons {
 		_, err := pRepo.CreatePerson(p)
@@ -46,7 +47,7 @@ func LoadDemoData(driver neo4j.DriverWithContext) {
 	}
 
 	// load animals
-	aRepo := repositories.NewAnimalRepo(session, ctx)
+	aRepo := repositories.NewAnimalRepo(session, d.Context)
 
 	for _, a := range testAnimals {
 		_, err := aRepo.CreateAnimal(a)
@@ -56,7 +57,7 @@ func LoadDemoData(driver neo4j.DriverWithContext) {
 	}
 
 	// load foods
-	fRepo := repositories.NewFoodRepo(session, ctx)
+	fRepo := repositories.NewFoodRepo(session, d.Context)
 
 	for _, f := range testFoods {
 		_, err := fRepo.CreateFood(f)
