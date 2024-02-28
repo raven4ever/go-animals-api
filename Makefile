@@ -6,7 +6,7 @@ run:
 	go run cmd/api/main.go
 
 stop:
-	docker compose down
+	docker compose down --remove-orphans
 
 fmt:
 	go fmt ./...
