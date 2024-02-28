@@ -13,8 +13,8 @@ type Config struct {
 
 var EnvConfig = loadEnvironmentConfig()
 
-func loadEnvironmentConfig() Config {
-	return Config{
+func loadEnvironmentConfig() *Config {
+	return &Config{
 		Server: ServerConfig{
 			Port: stringToPort(getEnvVariable("PORT", "8585")),
 		},

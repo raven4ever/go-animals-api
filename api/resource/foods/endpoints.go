@@ -1,17 +1,13 @@
 package foods
 
 import (
-	"animalz/db/repositories"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
-	"github.com/neo4j/neo4j-go-driver/neo4j"
 )
 
 // get all foods endpoint
 func GetFoods(c echo.Context) error {
-	session := driver.NewSession(ctx, neo4j.SessionConfig{AccessMode: neo4j.AccessModeWrite})
-	defer session.Close(ctx)
-	fRepo := repositories.NewFoodRepo(session, ctx)
+	test := []string{"apple", "banana", "orange", "pear", "grape", "strawberry", "blueberry", "raspberry", "blackberry", "kiwi", "mango", "pineapple", "watermelon", "cantaloupe", "honeydew", "peach", "plum", "cherry", "apricot", "nectarine", "pomegranate", "fig", "date", "coconut", "papaya", "lychee", "guava", "passion fruit", "dragon fruit", "star fruit", "persimmon", "kiwano", "breadfruit", "jackfruit", "durian", "rambutan", "longan", "mangosteen", "salak", "soursop", "cherimoya", "custard apple", "sugar apple", "atemoia", "atemoya"}
 	return c.JSON(http.StatusOK, test)
 }

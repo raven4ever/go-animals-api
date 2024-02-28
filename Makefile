@@ -7,3 +7,6 @@ run:
 
 stop:
 	docker compose down
+
+fmt:
+	go fmt ./...
