@@ -5,10 +5,10 @@ import (
 )
 
 type Animal struct {
-	ID      string
-	Name    string
-	Species string
-	Age     int64
+	ID      string `json:"id"`
+	Name    string `json:"name"`
+	Species string `json:"species"`
+	Age     int64  `json:"age"`
 }
 
 type Animals []Animal

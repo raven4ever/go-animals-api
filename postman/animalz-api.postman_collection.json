@@ -56,6 +56,88 @@
 			"name": "animal",
 			"item": [
 				{
+					"name": "invalids",
+					"item": [
+						{
+							"name": "Invalid ID",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{base_url}}/{{api_v1_path}}/animals/666",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"{{api_v1_path}}",
+										"animals",
+										"666"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Missing Data for Add",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/{{api_v1_path}}/animals",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"{{api_v1_path}}",
+										"animals"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Wrong Age",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "sfdgd",
+											"type": "text"
+										},
+										{
+											"key": "age",
+											"value": "9999",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base_url}}/{{api_v1_path}}/animals",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"{{api_v1_path}}",
+										"animals"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "All Animals",
 					"request": {
 						"method": "GET",
@@ -68,6 +150,82 @@
 							"path": [
 								"{{api_v1_path}}",
 								"animals"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/{{api_v1_path}}/animals/666",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{api_v1_path}}",
+								"animals",
+								"666"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Animal",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "trewqasdfg",
+									"type": "text"
+								},
+								{
+									"key": "species",
+									"value": "999",
+									"type": "text"
+								},
+								{
+									"key": "age",
+									"value": "999",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/{{api_v1_path}}/animals",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{api_v1_path}}",
+								"animals"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Animal",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/{{api_v1_path}}/animals/93e6a966-2cc5-40e5-b819-480819350696",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{api_v1_path}}",
+								"animals",
+								"93e6a966-2cc5-40e5-b819-480819350696"
 							]
 						}
 					},
