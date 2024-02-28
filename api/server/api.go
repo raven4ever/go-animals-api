@@ -4,6 +4,7 @@ import (
 	"animalz/api/resource/animals"
 	"animalz/api/resource/foods"
 	"animalz/api/resource/persons"
+
 	"animalz/db"
 
 	"github.com/labstack/echo/v4"
@@ -27,14 +28,17 @@ func (s *ApiServer) Run() error {
 	// create the API v1 group
 	apiV1Group := echoServer.Group("/api/v1")
 
-	// add the animals endpoints
-	apiV1Group.GET("/animals", animals.GetAnimals)
+	// animals handlers
+	animalsService := animals.NewAnimalService(s.Database)
+	animalsService.RegisterRoutes(apiV1Group)
 
-	// add the persons endpoints
-	apiV1Group.GET("/persons", persons.GetPersons)
+	// foods handlers
+	foodsService := foods.NewFoodService(s.Database)
+	foodsService.RegisterRoutes(apiV1Group)
 
-	// add the foods endpoints
-	apiV1Group.GET("/foods", foods.GetFoods)
+	// persons handlers
+	personsService := persons.NewPersonService(s.Database)
+	personsService.RegisterRoutes(apiV1Group)
 
 	// start the server
 	return echoServer.Start(s.Address)
