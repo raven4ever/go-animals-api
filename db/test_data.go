@@ -6,8 +6,8 @@ import (
 	"context"
 
 	"github.com/google/uuid"
-	"github.com/labstack/gommon/log"
 	"github.com/neo4j/neo4j-go-driver/v5/neo4j"
+	"log"
 )
 
 var (
@@ -41,7 +41,7 @@ func LoadDemoData(driver neo4j.DriverWithContext) {
 	for _, p := range testPersons {
 		_, err := pRepo.CreatePerson(p)
 		if err != nil {
-			log.Error(err)
+			log.Println(err)
 		}
 	}
 
@@ -51,7 +51,7 @@ func LoadDemoData(driver neo4j.DriverWithContext) {
 	for _, a := range testAnimals {
 		_, err := aRepo.CreateAnimal(a)
 		if err != nil {
-			log.Error(err)
+			log.Println(err)
 		}
 	}
 
@@ -61,8 +61,7 @@ func LoadDemoData(driver neo4j.DriverWithContext) {
 	for _, f := range testFoods {
 		_, err := fRepo.CreateFood(f)
 		if err != nil {
-			log.Error(err)
+			log.Println(err)
 		}
 	}
-
 }

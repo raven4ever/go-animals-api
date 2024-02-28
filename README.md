@@ -6,7 +6,6 @@ Technologies used:
 
 - Go
   - [https://github.com/labstack/echo](echo)
-  - [https://github.com/joeshaw/envdecode](envdecode)
 - Neo4j
 - HTMX
 
