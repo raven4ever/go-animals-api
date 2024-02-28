@@ -11,13 +11,10 @@ import (
 func main() {
 	log.Println("Starting the activity...")
 
-	// create and parse the config
-	c := config.New()
-
 	log.Println("Connecting to the Neo4j Database...")
 	// create the database driver
 	ctx := context.Background()
-	driver, err := db.New(c.Neo4j)
+	driver, err := db.New(config.EnvConfig.Neo4j)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -31,14 +28,14 @@ func main() {
 	}
 
 	// load demo data id applicable
-	if c.Neo4j.DemoData {
+	if config.EnvConfig.Neo4j.DemoData {
 		log.Println("Loading demo data...")
 		db.LoadDemoData(driver)
 	}
 
 	// create the server
-	srv := router.New(c.Server)
+	srv := router.New(config.EnvConfig.Server)
 
 	// Start server
-	srv.Logger.Fatal(srv.Start(c.Server.Addr()))
+	srv.Logger.Fatal(srv.Start(config.EnvConfig.Server.Addr()))
 }

@@ -1,9 +1,11 @@
 package config
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type ServerConfig struct {
-	Port int `env:"SERVER_PORT,default=8585"`
+	Port int
 }
 
 func (sc *ServerConfig) Addr() string {
