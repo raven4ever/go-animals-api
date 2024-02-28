@@ -1,0 +1,111 @@
+{
+	"info": {
+		"_postman_id": "2dd93386-f7ce-4092-b706-8f44eadb0d9d",
+		"name": "animalz-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10694994"
+	},
+	"item": [
+		{
+			"name": "food",
+			"item": [
+				{
+					"name": "All Foods",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/{{api_v1_path}}/foods",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{api_v1_path}}",
+								"foods"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "person",
+			"item": [
+				{
+					"name": "All Persons",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/{{api_v1_path}}/persons",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{api_v1_path}}",
+								"persons"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "animal",
+			"item": [
+				{
+					"name": "All Animals",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/{{api_v1_path}}/animals",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{api_v1_path}}",
+								"animals"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "api_v1_path",
+			"value": "api/v1",
+			"type": "string"
+		},
+		{
+			"key": "base_url",
+			"value": "http://127.0.0.1:8585",
+			"type": "string"
+		}
+	]
+}
