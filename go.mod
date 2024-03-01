@@ -3,10 +3,10 @@ module animalz
 go 1.22.0
 
 require (
+	github.com/go-playground/validator/v10 v10.18.0
 	github.com/google/uuid v1.6.0
 	github.com/labstack/echo/v4 v4.11.4
 	github.com/neo4j/neo4j-go-driver/v5 v5.17.0
-	github.com/go-playground/validator/v10 v10.18.0
 )
 
 require (
